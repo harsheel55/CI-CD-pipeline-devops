@@ -19,21 +19,32 @@ jobs:
         node-version: '14'
 
     - name: Install backend dependencies
-      run: npm install
+      run: |
+        cd backend  # Navigate to the server directory
+        npm install
 
     - name: Install frontend dependencies
       run: |
-        cd frontend
+        cd frontend  # Navigate to the client directory
         npm install
-    - name: Run tests
-      run: npm test
+
+    - name: Run backend tests
+      run: |
+        cd backend  # Navigate to the server directory
+        npm test
+
+    - name: Run frontend tests
+      run: |
+        cd frontend  # Navigate to the client directory
+        npm test
 
     - name: Build frontend
       run: |
-        cd frontend
+        cd frontend  # Navigate to the client directory
         npm run build
+
     - name: Upload build artifacts
       uses: actions/upload-artifact@v3  # Updated to version 3
       with:
         name: build
-        path: ./frontend/build
+        path: ./client/build  # Ensure this points to the correct build path
