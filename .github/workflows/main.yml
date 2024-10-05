@@ -31,11 +31,11 @@ jobs:
 
     - name: Build frontend
       run: |
-        cd client
+        cd frontend
         npm run build
 
     - name: Upload build artifacts
       uses: actions/upload-artifact@v3  # Updated to version 3
       with:
         name: build
-        path: ./client/build
+        path: ./frontend/build
