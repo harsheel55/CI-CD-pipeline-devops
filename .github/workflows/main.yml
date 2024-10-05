@@ -20,7 +20,7 @@ jobs:
 
     - name: Install backend dependencies
       run: |
-        cd server  # Change to your backend directory if necessary
+        cd index  # Change to your backend directory if necessary
         npm install
 
     - name: Install frontend dependencies
@@ -30,7 +30,7 @@ jobs:
 
     - name: Run backend tests
       run: |
-        cd server  # Change to your backend directory to run tests
+        cd index  # Change to your backend directory to run tests
         npm test
 
     - name: Run frontend tests
