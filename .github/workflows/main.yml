@@ -10,34 +10,41 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-    - name: Set up Node.js
-      uses: actions/setup-node@v2
-      with:
-        node-version: '14'
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
 
-    - name: Install backend dependencies
-      run: npm install
+      - name: Install backend dependencies
+        run: |
+          cd server  # Change to your backend directory if necessary
+          npm install
 
-    - name: Install frontend dependencies
-      run: |
-        cd frontend
-        npm install
+      - name: Install frontend dependencies
+        run: |
+          cd frontend  # Ensure this is the correct name of your frontend directory
+          npm install
 
-    - name: Run tests
-      run: npm test
+      - name: Run backend tests
+        run: |
+          cd server  # Change to your backend directory to run tests
+          npm test
 
-    - name: Build frontend
-      run: |
-        cd frontend
-        npm run build
+      - name: Run frontend tests
+        run: |
+          cd frontend  # Ensure this is the correct name of your frontend directory
+          npm test
 
-    - name: Upload build artifacts
-      uses: actions/upload-artifact@v3  # Updated to version 3
-      with:
-        name: build
-        path: ./frontend/build
+      - name: Build frontend
+        run: |
+          cd frontend  # Ensure this is the correct name of your frontend directory
+          npm run build
 
-this is my main.yml 
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v3  # Updated to version 3
+        with:
+          name: build
+          path: ./frontend/build  # Ensure this path is correct
