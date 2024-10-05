@@ -1,18 +1,28 @@
-name: CI-CD Pipeline for MERN App Hospital management system
+name: CICD
 
 on:
   push:
-    branches:
-      - main
+    branches: [main]
 
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
+      -  uses: actions/checkout@v4
 
+      
+      - name: Github Tag Bump
+        id: tab_bump
+        uses: anothrNick/github-tag-action@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          INITIAL_VERSION: 1.67.0
+          DEFAULT_BUMP: patch
+
+          
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
